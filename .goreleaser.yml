@@ -1,0 +1,29 @@
+project_name: placa
+
+builds:
+  - id: "placa"
+    main: ./main.go
+    binary: placa
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    hooks:
+      pre: go mod tidy
+      post: go test ./...
+
+archives:
+  - id: "archive"
+    builds:
+      - "placa"
+    format: tar.gz
+    files:
+      - README.md
+
+release:
+  github:
+    owner: publi0
+    name: placa
